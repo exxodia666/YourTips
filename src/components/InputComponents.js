@@ -1,16 +1,34 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, Text, TextInput, Button} from 'react-native';
+import React, {useState} from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  Button,
+  View,
+  Alert,
+} from 'react-native';
+import TodoStore from '../store/todoStore';
 
 const InputComponent = () => {
+  //const actions = {...TodoStore};
+  const [text, setText] = useState('');
   return (
-    <>
-      <TextInput 
-        placeholder = 'Enter tip'
+    <View>
+      <Text>{text}</Text>
+      <TextInput
+        style={{height: 40}}
+        placeholder="Type here to translate!"
+        onChangeText={text => setText(text)}
+        defaultValue={text}
       />
-      <Button 
-        title = 'Add'
+      <Button
+        title="Add"
+        onPress={() => {
+          TodoStore.addTodo(text);
+        }}
       />
-    </>
+    </View>
   );
 };
 

@@ -1,4 +1,5 @@
-import {decorate, observable} from 'mobx';
+import {decorate, observable, action} from 'mobx';
+import {Alert} from 'react-native';
 
 class Todos {
   todos = [
@@ -7,15 +8,32 @@ class Todos {
     {id: 2, text: 'Learn Redux', finished: false},
   ];
   addTodo(input) {
-
+    Alert.alert('Add Action');
   }
   deleteTodo(id) {
-
+    console.log('Delete Action');
   }
-  showFinished
+  showFinished() {
+    console.log('showFinished Action');
+  }
+  showActive() {
+    console.log('Show active Action');
+  }
+  showAll() {
+    console.log('all Action');
+  }
 }
 
-decorate(Todo, {
+decorate(Todos, {
   title: observable,
   finished: observable,
+  addTodo: action,
+  deleteTodo: action,
+  showFinished: action,
+  showActive: action,
+  showAll: action,
 });
+
+const TodoStore = new Todos();
+
+export default TodoStore;
