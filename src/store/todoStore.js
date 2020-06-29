@@ -8,7 +8,14 @@ class Todos {
     {id: 2, text: 'Learn Redux', finished: false},
   ];
   addTodo(input) {
-    Alert.alert('Add Action');
+    // Alert.alert('Add Action');
+    const todo = {
+      id: this.todos.length,
+      text: input,
+      finished: false,
+    };
+    this.todos.push(input);
+    Alert.alert(this.todos.length);
   }
   deleteTodo(id) {
     console.log('Delete Action');
@@ -34,6 +41,4 @@ decorate(Todos, {
   showAll: action,
 });
 
-const TodoStore = new Todos();
-
-export default TodoStore;
+export default new Todos();

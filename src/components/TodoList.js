@@ -1,12 +1,14 @@
 import React from 'react';
-import {StyleSheet, Text, FlatList, ScrollView} from 'react-native';
-import TodoStore from '../store/todoStore';
+import {StyleSheet, Text, FlatList, ScrollView, Alert} from 'react-native';
+//import TodoStore from '../store/todoStore';
+import {observer, inject} from 'mobx-react';
 
-const TodoList = () => {
-  const todos = TodoStore.todos;
+const TodoList = props => {
+  //const todos = TodoStore.todos;
+  console.log(props.store);
   return (
     <ScrollView>
-      {todos.map(item => {
+      {props.store.todos.map(item => {
         return <Text key={item.id}>{item.text}</Text>;
       })}
     </ScrollView>
@@ -15,4 +17,5 @@ const TodoList = () => {
 
 const styles = StyleSheet.create({});
 
-export default TodoList;
+export default inject('store')(observer(TodoList));
+//export default TodoList;

@@ -15,10 +15,9 @@ const InputComponent = () => {
   const [text, setText] = useState('');
   return (
     <View>
-      <Text>{text}</Text>
       <TextInput
         style={{height: 40}}
-        placeholder="Type here to translate!"
+        placeholder="Type your tip!"
         onChangeText={text => setText(text)}
         defaultValue={text}
       />
