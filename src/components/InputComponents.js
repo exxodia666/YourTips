@@ -1,18 +1,17 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  Button,
-  View,
-  Alert,
-} from 'react-native';
-import TodoStore from '../store/todoStore';
+import {StyleSheet, TextInput, Button, View} from 'react-native';
+import { set } from 'mobx';
+//import { action } from 'mobx';
 
-const InputComponent = () => {
-  //const actions = {...TodoStore};
+const InputComponent = props => {
   const [text, setText] = useState('');
+  const actions = props.model().tasks.addTask;
+  console.log(actions);
+  const addTodo = () => {
+    console.log('action')
+    actions(text);
+  };
+
   return (
     <View>
       <TextInput
@@ -24,7 +23,8 @@ const InputComponent = () => {
       <Button
         title="Add"
         onPress={() => {
-          TodoStore.addTodo(text);
+          addTodo();
+          setText('');
         }}
       />
     </View>

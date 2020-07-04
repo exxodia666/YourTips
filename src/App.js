@@ -2,15 +2,22 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import InputComponent from './components/InputComponents';
 import TodoList from './components/TodoList';
-import {Provider} from 'mobx-react';
-import store from './store/todoStore';
+import RootModel from './models/RootModel';
+import 'mobx-react/batchingForReactNative'
 const App = () => {
+  const MobxContext = React.createContext(null);
+  //console.log('RootModel');
+  //console.log(RootModel.tasks.addTask);
+  function useRootModel() {
+    const Root = React.useContext(MobxContext);
+    return Root;
+  }
   return (
     <SafeAreaView>
-      <Provider store={store}>
-        <InputComponent />
-        <TodoList />
-      </Provider>
+      <MobxContext.Provider value={RootModel}>
+        <InputComponent model={useRootModel} />
+        <TodoList model={useRootModel} />
+      </MobxContext.Provider>
     </SafeAreaView>
   );
 };
