@@ -4,18 +4,19 @@ import {observer} from 'mobx-react';
 import ListItem from './ListItem';
 
 const TodoList = props => {
-  const tasks = props.model();
+  const tasks = props.model().tasks;
+  console.log(tasks.items);
   return (
     <ScrollView>
-      {tasks.tasks.items.map(item => (
+      {tasks.items.map(item => (
         <ListItem
           key={item.id}
           text={item.text}
           finished={item.finished}
           id={item.id}
-          toggle = {}
-          edit = {}
-          delete = {}
+          toggle={item.toggleTask}
+          edit={tasks.editTask}
+          delete={tasks.deleteTask}
         />
       ))}
     </ScrollView>

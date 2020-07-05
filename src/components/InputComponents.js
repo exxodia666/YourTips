@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, Button, View} from 'react-native';
-import { set } from 'mobx';
+import {set} from 'mobx';
 //import { action } from 'mobx';
 
 const InputComponent = props => {
   const [text, setText] = useState('');
-  const actions = props.model().tasks.addTask;
-  console.log(actions);
-  const addTodo = () => {
-    console.log('action')
-    actions(text);
+  const addTask = props.model().tasks.addTask;
+
+  const add = () => {
+    console.log('action');
+    addTask(text);
   };
 
   return (
@@ -23,7 +23,7 @@ const InputComponent = props => {
       <Button
         title="Add"
         onPress={() => {
-          addTodo();
+          add();
           setText('');
         }}
       />

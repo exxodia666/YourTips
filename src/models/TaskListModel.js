@@ -16,7 +16,16 @@ class TaskListModel {
   };
 
   deleteTask = id => {
-    this.items.filter(item => item.id !== id);
+  //s  console.log('DELETE ACTION');
+    this.items = this.items
+      .filter(item => item.id !== id)
+      .map(item => {
+        if (item.id > id) {
+          return {...item, id: item.id - 1};
+        } else {
+          return item;
+        }
+      });
   };
 
   editTask = (id, text) => {
