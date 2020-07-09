@@ -12,6 +12,7 @@ import {
   TextInput,
 } from 'react-native';
 import {observer} from 'mobx-react';
+
 const LIstItem = props => {
   const [menu, setMenu] = useState(false);
   const [input, setInput] = useState(false);
@@ -20,12 +21,10 @@ const LIstItem = props => {
   const toggleTask = () => {
     props.toggle();
   };
-
   const editTask = (id, text) => {
     props.edit(id, text);
     setInput(false);
   };
-
   const deleteTask = id => {
     props.delete(id);
     setMenu(false);
@@ -39,16 +38,25 @@ const LIstItem = props => {
           title={props.finished.toString()}
           onPress={() => toggleTask()}
         />
+
         <TouchableOpacity>
-          <Text onLongPress={() => setMenu(!menu)}>
-            {props.id + 1 + '.' + props.text}
+          <Text
+            style={props.finished ? styles.textLineThrough : styles.textNone}
+            onLongPress={() => setMenu(!menu)}>
+            {props.text}
           </Text>
         </TouchableOpacity>
       </View>
       {menu && (
         <View style={styles.row}>
           <Button title="Edit" onPress={() => setInput(!input)} />
-          <Button title="Delete" onPress={() => deleteTask(props.id)} />
+          <Button
+            title="Delete"
+            onPress={() => {
+              setMenu(false);
+              deleteTask(props.id);
+            }}
+          />
           {input && (
             <>
               <TextInput
@@ -61,6 +69,7 @@ const LIstItem = props => {
                 title="Submit"
                 onPress={() => {
                   editTask(props.id, text);
+                  setMenu(false);
                   setText('');
                 }}
               />
@@ -73,6 +82,12 @@ const LIstItem = props => {
 };
 
 const styles = StyleSheet.create({
+  textLineThrough: {
+    textDecorationLine: 'line-through',
+  },
+  textNone: {
+    textDecorationLine: 'none',
+  },
   row: {
     padding: 5,
     flex: 1,

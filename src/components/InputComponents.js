@@ -8,7 +8,6 @@ const InputComponent = props => {
   const addTask = props.model().tasks.addTask;
 
   const add = () => {
-    console.log('action');
     addTask(text);
   };
 

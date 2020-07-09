@@ -3,16 +3,21 @@ const {decorate, observable, action} = require('mobx');
 class TaskModel {
   text = '';
   finished = false;
-  
+
   constructor({id, text}) {
     this.id = id;
     this.text = text;
   }
 
-  toggleTask() {
-    console.log('ACTION');
+  toggleTask = () => {
+    console.log('TOGGLE');
     this.finished = !this.finished;
-  }
+  };
+
+  editTask = task => {
+    console.log('EDIT');
+    this.text = task;
+  };
 }
 
 export default decorate(TaskModel, {

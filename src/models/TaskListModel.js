@@ -1,5 +1,5 @@
 import TaskModel from './TaskModel';
-const {decorate, observable, action} = require('mobx');
+const {decorate, observable, action, computed} = require('mobx');
 
 class TaskListModel {
   items = [];
@@ -7,30 +7,39 @@ class TaskListModel {
     this.items = items;
   }
   addTask = text => {
+    console.log('ADD');
     this.items.push(
       new TaskModel({
-        id: this.items.length,
+        id: Math.random(),
         text: text,
       }),
     );
   };
 
   deleteTask = id => {
-  //s  console.log('DELETE ACTION');
-    this.items = this.items
-      .filter(item => item.id !== id)
-      .map(item => {
-        if (item.id > id) {
-          return {...item, id: item.id - 1};
-        } else {
-          return item;
-        }
-      });
+    console.log('DELETE ACTION');
+    this.items = this.items.filter(item => item.id !== id);
   };
 
-  editTask = (id, text) => {
-    this.items[id].text = text;
-  };
+  get showActiveTasks() {
+    console.log('Computed');
+    return this.items.filter(item => {
+      return item.finished === false;
+    });
+  }
+
+  get showDoneTasks() {
+    console.log('Computed 2');
+    return this.items.filter(item => {
+      return item.finished === true;
+    });
+  }
+  /*
+  get showFavoriteTasks() {
+    return this.items.filter((item) => {
+      return item.finished === false;
+    })
+  }*/
 }
 
 export default decorate(TaskListModel, {
@@ -38,4 +47,7 @@ export default decorate(TaskListModel, {
   addTask: action,
   deleteTask: action,
   editTask: action,
+  showActiveTasks: computed,
+  showDoneTasks: computed,
+  //showFavoriteTasks: computed,
 });
