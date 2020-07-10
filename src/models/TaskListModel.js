@@ -34,20 +34,18 @@ class TaskListModel {
       return item.finished === true;
     });
   }
-  /*
   get showFavoriteTasks() {
-    return this.items.filter((item) => {
-      return item.finished === false;
-    })
-  }*/
+    return this.items.filter(item => {
+      return item.favorite === true;
+    });
+  }
 }
 
 export default decorate(TaskListModel, {
   items: observable,
   addTask: action,
   deleteTask: action,
-  editTask: action,
   showActiveTasks: computed,
   showDoneTasks: computed,
-  //showFavoriteTasks: computed,
+  showFavoriteTasks: computed,
 });

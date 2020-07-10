@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  FlatList,
-  ScrollView,
-  Alert,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, FlatList, ScrollView, View} from 'react-native';
 import {observer} from 'mobx-react';
 import ListItem from './ListItem';
 import {mode} from '../App';
@@ -19,8 +12,8 @@ const TodoList = ({filterMode, model}) => {
       ? model().tasks.showActiveTasks //active tasks
       : filterMode === mode.done
       ? model().tasks.showDoneTasks ///done tasks
-      : model().tasks === false; /// favorite task
-  const actions = tasks;
+      : model().tasks.showFavoriteTasks; /// favorite task
+console.log(tasks);
   return (
     <>
       <Text>{filterMode}</Text>
@@ -31,10 +24,12 @@ const TodoList = ({filterMode, model}) => {
               key={item.id}
               text={item.text}
               finished={item.finished}
+              favorite={item.favorite}
               id={item.id}
               toggle={item.toggleTask}
-              //edit={tasks.editTask}
-              //delete={tasks.deleteTask}
+              toggleFav={item.makeTaskFavorite}
+              edit={item.editTask}
+              delete={model().tasks.deleteTask}
             />
           ))}
         </ScrollView>

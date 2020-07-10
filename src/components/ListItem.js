@@ -21,6 +21,10 @@ const LIstItem = props => {
   const toggleTask = () => {
     props.toggle();
   };
+
+  const setFav = () => {
+    props.toggleFav();
+  };
   const editTask = (id, text) => {
     props.edit(id, text);
     setInput(false);
@@ -46,6 +50,7 @@ const LIstItem = props => {
             {props.text}
           </Text>
         </TouchableOpacity>
+        <Button title={props.favorite.toString()} onPress={() => setFav()} />
       </View>
       {menu && (
         <View style={styles.row}>
