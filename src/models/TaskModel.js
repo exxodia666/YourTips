@@ -24,7 +24,6 @@ class TaskModel {
     this.text = task;
   };
 }
-
 export default decorate(TaskModel, {
   text: observable,
   finished: observable,

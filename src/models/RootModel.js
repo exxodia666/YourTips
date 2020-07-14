@@ -6,7 +6,6 @@ const tasks = [
   {id: 1, text: 'Buy milk', finished: true},
   {id: 2, text: 'Buy meat', finished: false},
 ];
-//console.log(TaskListModel());
 class RootModel {
   constructor() {
     this.tasks = new TaskListModel({
