@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, AsyncStorage} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, AsyncStorage, View} from 'react-native';
 import InputComponent from './components/InputComponents';
 import TodoList from './components/TodoList';
 import RootModel from './models/RootModel';
 import 'mobx-react/batchingForReactNative';
 import FilterButtons from './components/FilterButtons';
-import {AsyncTrunk, date} from 'mobx-sync';
+import {AsyncTrunk} from 'mobx-sync';
 
 export const mode = {
   all: 'all',
@@ -16,13 +16,14 @@ export const mode = {
 
 const App = () => {
   const [filterMode, setFilterMode] = useState(mode.all);
+  const [loaded, setLoaded] = useState(true);
+  /*
   const trunk = new AsyncTrunk(RootModel, {storage: AsyncStorage});
-  const [loaded, setLoaded] = useState(false);
-  
+
   trunk.init().then(() => {
     setLoaded(true);
   });
-
+*/
   const MobxContext = React.createContext(null);
 
   function useRootModel() {
@@ -33,17 +34,24 @@ const App = () => {
     return (
       <SafeAreaView>
         <MobxContext.Provider value={RootModel}>
-          <InputComponent model={useRootModel} />
-          <FilterButtons setMode={setFilterMode} />
-          <TodoList model={useRootModel} filterMode={filterMode} />
+          <View style={styles.app}>
+            <FilterButtons setMode={setFilterMode} />
+            <TodoList model={useRootModel} filterMode={filterMode} />
+            <InputComponent model={useRootModel} />
+          </View>
         </MobxContext.Provider>
       </SafeAreaView>
     );
   } else {
-    return <Text>loading</Text>;
+    return <Text>loading!</Text>;
   }
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  app: {
+    padding: 5,
+    alignItems: 'center',
+  },
+});
 
 export default App;

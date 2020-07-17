@@ -1,5 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, FlatList, ScrollView, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  FlatList,
+  ScrollView,
+  View,
+  Dimensions,
+} from 'react-native';
 import {observer} from 'mobx-react';
 import ListItem from './ListItem';
 import {mode} from '../App';
@@ -13,45 +20,33 @@ const TodoList = ({filterMode, model}) => {
       : filterMode === mode.done
       ? model().tasks.showDoneTasks ///done tasks
       : model().tasks.showFavoriteTasks; /// favorite task
-console.log(tasks);
   return (
-    <>
-      <Text>{filterMode}</Text>
-      <View style={styles.all}>
-        <ScrollView>
-          {tasks.map(item => (
-            <ListItem
-              key={item.id}
-              text={item.text}
-              finished={item.finished}
-              favorite={item.favorite}
-              id={item.id}
-              toggle={item.toggleTask}
-              toggleFav={item.makeTaskFavorite}
-              edit={item.editTask}
-              delete={model().tasks.deleteTask}
-            />
-          ))}
-        </ScrollView>
-      </View>
-    </>
+    <ScrollView style={styles.all}>
+      {tasks.map(item => (
+        <ListItem
+          key={item.id}
+          text={item.text}
+          finished={item.finished}
+          favorite={item.favorite}
+          id={item.id}
+          toggle={item.toggleTask}
+          toggleFav={item.makeTaskFavorite}
+          edit={item.editTask}
+          delete={model().tasks.deleteTask}
+        />
+      ))}
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   all: {
-    backgroundColor: 'yellow',
-  },
-  active: {
-    backgroundColor: 'red',
-  },
-  done: {
-    backgroundColor: 'green',
-  },
-  list: {
-    backgroundColor: 'red',
+   // borderWidth: 0.6,
+    width: Dimensions.get('screen').width * 0.9,
+    height: Dimensions.get('screen').height * 0.7,
   },
 });
+
 export default observer(TodoList);
 
 /*

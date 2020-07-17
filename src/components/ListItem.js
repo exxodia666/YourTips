@@ -2,11 +2,7 @@ import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
-  FlatList,
-  ScrollView,
-  Alert,
   View,
-  CheckBox,
   Button,
   TouchableOpacity,
   TextInput,

@@ -11,12 +11,10 @@
   },
   "dependencies": {
     "mobx": "^5.15.4",
-    "mobx-persist": "^0.4.1",
     "mobx-react": "^6.2.2",
     "mobx-sync": "^3.0.0",
     "react": "16.11.0",
-    "react-native": "0.62.2",
-    "serializr": "^2.0.3"
+    "react-native": "0.62.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
