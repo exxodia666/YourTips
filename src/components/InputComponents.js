@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
-import {StyleSheet, TextInput, Button, View, Dimensions} from 'react-native';
+import {StyleSheet, TextInput, Button, View, Dimensions, Alert} from 'react-native';
 
 const InputComponent = props => {
   const [text, setText] = useState('');
   const addTask = props.model().tasks.addTask;
 
   const add = () => {
-    addTask(text);
+    if (text !== '') {
+      addTask(text);
+    } else {
+      Alert.alert('Enter task!')
+    }
   };
 
   return (

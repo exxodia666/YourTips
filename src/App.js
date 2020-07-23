@@ -6,6 +6,7 @@ import RootModel from './models/RootModel';
 import 'mobx-react/batchingForReactNative';
 import FilterButtons from './components/FilterButtons';
 import {AsyncTrunk} from 'mobx-sync';
+import Counter from './components/Counter';
 
 export const mode = {
   all: 'all',
@@ -19,10 +20,14 @@ const App = () => {
   const [loaded, setLoaded] = useState(true);
   /*
   const trunk = new AsyncTrunk(RootModel, {storage: AsyncStorage});
-
-  trunk.init().then(() => {
-    setLoaded(true);
-  });
+  trunk
+    .init()
+    .then(() => {
+      setLoaded(true);
+    })
+    .catch(e => {
+      console.log(e);
+    });
 */
   const MobxContext = React.createContext(null);
 
@@ -36,6 +41,7 @@ const App = () => {
         <MobxContext.Provider value={RootModel}>
           <View style={styles.app}>
             <FilterButtons setMode={setFilterMode} />
+            <Counter model={useRootModel} />
             <TodoList model={useRootModel} filterMode={filterMode} />
             <InputComponent model={useRootModel} />
           </View>
@@ -49,7 +55,11 @@ const App = () => {
 
 const styles = StyleSheet.create({
   app: {
-    padding: 5,
+    //flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignContent: 'center',
+    //padding: 5,
     alignItems: 'center',
   },
 });
