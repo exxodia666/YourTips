@@ -6,6 +6,7 @@ import {
   Button,
   TouchableOpacity,
   TextInput,
+  CheckBox,
 } from 'react-native';
 import {observer} from 'mobx-react';
 
@@ -17,7 +18,6 @@ const LIstItem = props => {
   const toggleTask = () => {
     props.toggle();
   };
-
   const setFav = () => {
     props.toggleFav();
   };
@@ -30,25 +30,55 @@ const LIstItem = props => {
     setMenu(false);
     setInput(false);
   };
-
+  
   return (
-    <>
+    <View style={styles.listItem}>
       <View style={styles.row}>
-        <Button
-          title={props.finished.toString()}
-          onPress={() => toggleTask()}
-        />
-
+        <CheckBox value={props.finished} onChange={() => toggleTask()} />
         <TouchableOpacity>
           <Text
-            style={props.finished ? styles.textLineThrough : styles.textNone}
+            style={
+              props.finished
+                ? {...styles.textLineThrough, ...styles.text}
+                : {...styles.textNone, ...styles.text}
+            }
             onLongPress={() => setMenu(!menu)}>
             {props.text}
           </Text>
         </TouchableOpacity>
-        <Button title={props.favorite.toString()} onPress={() => setFav()} />
       </View>
-      {menu && (
+      <Button
+        title="*"
+        color={props.favorite ? 'purple' : 'green'}
+        onPress={() => setFav()}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  listItem: {
+    padding: 5,
+    flex: 1,
+    margin: 5,
+    borderWidth: 1,
+  },
+  text: {
+    padding: 5,
+  },
+  textLineThrough: {
+    textDecorationLine: 'line-through',
+  },
+  textNone: {
+    textDecorationLine: 'none',
+  },
+  row: {
+    flexDirection: 'row',
+  },
+});
+
+export default observer(LIstItem);
+/*{menu && (
         <View style={styles.row}>
           <Button title="Edit" onPress={() => setInput(!input)} />
           <Button
@@ -77,25 +107,4 @@ const LIstItem = props => {
             </>
           )}
         </View>
-      )}
-    </>
-  );
-};
-
-const styles = StyleSheet.create({
-  textLineThrough: {
-    textDecorationLine: 'line-through',
-  },
-  textNone: {
-    textDecorationLine: 'none',
-  },
-  row: {
-    padding: 5,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-});
-
-export default observer(LIstItem);
+      )}*/
