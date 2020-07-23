@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, ScrollView, Dimensions} from 'react-native';
 import {observer} from 'mobx-react';
 import ListItem from './ListItem';
 import {mode} from '../App';
@@ -19,28 +15,33 @@ const TodoList = ({filterMode, model}) => {
       : model().tasks.showFavoriteTasks; /// favorite task
   return (
     <ScrollView style={styles.all}>
-      {tasks.map(item => (
-        <ListItem
-          key={item.id}
-          text={item.text}
-          finished={item.finished}
-          favorite={item.favorite}
-          id={item.id}
-          toggle={item.toggleTask}
-          toggleFav={item.makeTaskFavorite}
-          edit={item.editTask}
-          delete={model().tasks.deleteTask}
-        />
-      ))}
+      {tasks.map(item => {
+        console.log(item);
+        return (
+          <ListItem
+            key={item.id}
+            text={item.text}
+            finished={item.finished}
+            favorite={item.favorite}
+            id={item.id}
+            toggle={item.toggleTask}
+            toggleFav={item.makeTaskFavorite}
+            toggleSelect={item.toggleSelect}
+            edit={item.editTask}
+            selected={item.selected}
+            delete={model().tasks.deleteTask}
+          />
+        );
+      })}
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   all: {
-   // borderWidth: 0.6,
+    // borderWidth: 0.6,
     width: Dimensions.get('screen').width * 0.9,
-    height: Dimensions.get('screen').height * 0.7,
+    height: Dimensions.get('screen').height * 0.65,
   },
 });
 

@@ -14,57 +14,80 @@ const LIstItem = props => {
   const [menu, setMenu] = useState(false);
   const [input, setInput] = useState(false);
   const [text, setText] = useState('');
-
+  //console.log(props);
   const toggleTask = () => {
     props.toggle();
   };
   const setFav = () => {
     props.toggleFav();
   };
-  const editTask = (id, text) => {
-    props.edit(id, text);
-    setInput(false);
+
+  const setSelected = () => {
+    console.log('init');
+    props.toggleSelect();
   };
-  const deleteTask = id => {
-    props.delete(id);
-    setMenu(false);
-    setInput(false);
-  };
-  
+
   return (
     <View style={styles.listItem}>
-      <View style={styles.row}>
+      <View style={styles.checkBox}>
         <CheckBox value={props.finished} onChange={() => toggleTask()} />
-        <TouchableOpacity>
-          <Text
-            style={
-              props.finished
-                ? {...styles.textLineThrough, ...styles.text}
-                : {...styles.textNone, ...styles.text}
-            }
-            onLongPress={() => setMenu(!menu)}>
-            {props.text}
-          </Text>
-        </TouchableOpacity>
       </View>
-      <Button
-        title="*"
-        color={props.favorite ? 'purple' : 'green'}
-        onPress={() => setFav()}
-      />
+      <TouchableOpacity
+        style={
+          props.selected
+            ? {...styles.selected, ...styles.text}
+            : {...styles.text}
+        }
+        onLongPress={() => setSelected()}>
+        <Text
+          style={props.finished ? styles.textLineThrough : styles.textNone}
+          onLongPress={() => setMenu(!menu)}>
+          {props.text}
+        </Text>
+      </TouchableOpacity>
+      <View style={styles.button}>
+        <Button
+          title="*"
+          color={props.favorite ? 'purple' : 'green'}
+          onPress={() => setFav()}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  listItem: {
-    padding: 5,
+  selected: {
+    backgroundColor: 'red',
+  },
+  checkBox: {
+    //backgroundColor: 'purple',
     flex: 1,
-    margin: 5,
-    borderWidth: 1,
+  },
+  button: {
+    flex: 1,
+    height: 30,
+    width: 30,
+    //borderRadius: 15,
+    //borderWidth: 1,
+    //backgroundColor: 'yellow',
   },
   text: {
+    justifyContent: 'center',
+    //alignItems:'center',
+    flex: 7,
+    //backgroundColor: 'red',
+    //width: '85%',
+  },
+
+  listItem: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
     padding: 5,
+    flex: 10,
+    margin: 5,
+    borderWidth: 1,
+    borderRadius: 5,
   },
   textLineThrough: {
     textDecorationLine: 'line-through',

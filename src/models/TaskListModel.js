@@ -16,9 +16,9 @@ class TaskListModel {
     );
   };
 
-  deleteTask = id => {
+  deleteTask = () => {
     console.log('DELETE ACTION');
-    this.items = this.items.filter(item => item.id !== id);
+    this.items = this.items.filter(item => item.selected === false);
   };
 
   get showActiveTasks() {
@@ -39,6 +39,12 @@ class TaskListModel {
       return item.favorite === true;
     });
   }
+
+  get showSelectedCount() {
+    return this.items.filter(item => {
+      return item.selected === true;
+    }).length;
+  }
 }
 
 export default decorate(TaskListModel, {
@@ -48,4 +54,5 @@ export default decorate(TaskListModel, {
   showActiveTasks: computed,
   showDoneTasks: computed,
   showFavoriteTasks: computed,
+  showSelectedCount: computed,
 });

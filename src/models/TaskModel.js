@@ -4,6 +4,7 @@ class TaskModel {
   text = '';
   finished = false;
   favorite = false;
+  selected = false;
 
   constructor({id, text}) {
     this.id = id;
@@ -13,6 +14,11 @@ class TaskModel {
   toggleTask = () => {
     console.log('TOGGLE');
     this.finished = !this.finished;
+  };
+
+  toggleSelect = () => {
+    console.log('TOGGLE SElect');
+    this.selected = !this.selected;
   };
 
   makeTaskFavorite = () => {
@@ -27,6 +33,7 @@ class TaskModel {
 export default decorate(TaskModel, {
   text: observable,
   finished: observable,
+  selected: observable,
   favorite: observable,
   toggleTask: action,
   editTask: action,
