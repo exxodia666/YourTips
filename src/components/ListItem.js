@@ -28,17 +28,16 @@ const LIstItem = props => {
   };
 
   return (
-    <View style={styles.listItem}>
+    <View
+      style={
+        props.selected
+          ? {...styles.selected, ...styles.listItem}
+          : {...styles.listItem}
+      }>
       <View style={styles.checkBox}>
         <CheckBox value={props.finished} onChange={() => toggleTask()} />
       </View>
-      <TouchableOpacity
-        style={
-          props.selected
-            ? {...styles.selected, ...styles.text}
-            : {...styles.text}
-        }
-        onLongPress={() => setSelected()}>
+      <TouchableOpacity style={styles.text} onLongPress={() => setSelected()}>
         <Text
           style={props.finished ? styles.textLineThrough : styles.textNone}
           onLongPress={() => setMenu(!menu)}>
@@ -58,7 +57,12 @@ const LIstItem = props => {
 
 const styles = StyleSheet.create({
   selected: {
-    backgroundColor: 'red',
+    borderColor: 'red',
+    borderWidth: 4,
+    borderRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderBottomWidth: 4,
+    borderLeftWidth: 4,
   },
   checkBox: {
     //backgroundColor: 'purple',
@@ -85,9 +89,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 5,
     flex: 10,
-    margin: 5,
-    borderWidth: 1,
-    borderRadius: 5,
+    margin: 6,
+    borderBottomLeftRadius: 5,
+    borderBottomWidth: 0.6,
+    borderLeftWidth: 0.6,
+    // borderRadius: 5,
   },
   textLineThrough: {
     textDecorationLine: 'line-through',
