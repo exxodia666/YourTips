@@ -1,5 +1,14 @@
 import React, {useState} from 'react';
-import {StyleSheet, TextInput, Button, View, Dimensions, Alert} from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  Button,
+  View,
+  Dimensions,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const InputComponent = props => {
   const [text, setText] = useState('');
@@ -9,7 +18,7 @@ const InputComponent = props => {
     if (text !== '') {
       addTask(text);
     } else {
-      Alert.alert('Enter task!')
+      Alert.alert('Enter task!');
     }
   };
 
@@ -21,15 +30,13 @@ const InputComponent = props => {
         onChangeText={text => setText(text)}
         defaultValue={text}
       />
-      <Button
-        style={styles.button}
-        color="green"
-        title="Add"
+      <TouchableOpacity
         onPress={() => {
           add();
           setText('');
-        }}
-      />
+        }}>
+        <Icon color="green" name="pluscircleo" size={40} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -37,10 +44,13 @@ const InputComponent = props => {
 const styles = StyleSheet.create({
   inputComponent: {
     width: Dimensions.get('screen').width * 0.9,
+    justifyContent: 'center',
+    alignItems: 'center',
     ///height: Dimensions.get('screen').height * 0.6,
   },
   textInput: {
     height: 40,
+    width: '100%',
     margin: 5,
     borderColor: 'grey',
     borderBottomWidth: 1,
