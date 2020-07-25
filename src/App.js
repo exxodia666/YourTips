@@ -18,17 +18,13 @@ export const mode = {
 const App = () => {
   const [filterMode, setFilterMode] = useState(mode.all);
   const [loaded, setLoaded] = useState(true);
-  /*
+
   const trunk = new AsyncTrunk(RootModel, {storage: AsyncStorage});
-  trunk
-    .init()
-    .then(() => {
-      setLoaded(true);
-    })
-    .catch(e => {
-      console.log(e);
-    });
-*/
+  trunk.init().then(e => {
+    console.log(e);
+    setLoaded(true);
+  });
+
   const MobxContext = React.createContext(null);
 
   function useRootModel() {
