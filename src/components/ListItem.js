@@ -9,6 +9,7 @@ import {
   CheckBox,
 } from 'react-native';
 import {observer} from 'mobx-react';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const LIstItem = props => {
   const [menu, setMenu] = useState(false);
@@ -45,11 +46,13 @@ const LIstItem = props => {
         </Text>
       </TouchableOpacity>
       <View style={styles.button}>
-        <Button
-          title="*"
-          color={props.favorite ? 'purple' : 'green'}
-          onPress={() => setFav()}
-        />
+        <TouchableOpacity onPress={() => setFav()}>
+          <Icon
+            color="red"
+            name={props.favorite ? 'heart' : 'heart-o'}
+            size={30}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -58,11 +61,7 @@ const LIstItem = props => {
 const styles = StyleSheet.create({
   selected: {
     borderColor: 'red',
-    borderWidth: 4,
-    borderRadius: 5,
-    borderBottomLeftRadius: 5,
-    borderBottomWidth: 4,
-    borderLeftWidth: 4,
+    borderWidth: 2,
   },
   checkBox: {
     //backgroundColor: 'purple',
@@ -85,15 +84,13 @@ const styles = StyleSheet.create({
   },
 
   listItem: {
+    elevation: 0.5,
+    borderRadius: 5,
     justifyContent: 'space-between',
     flexDirection: 'row',
-    padding: 5,
+    padding: 10,
     flex: 10,
     margin: 6,
-    borderBottomLeftRadius: 5,
-    borderBottomWidth: 0.6,
-    borderLeftWidth: 0.6,
-    // borderRadius: 5,
   },
   textLineThrough: {
     textDecorationLine: 'line-through',

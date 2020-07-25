@@ -40,8 +40,8 @@ const TodoList = ({filterMode, model}) => {
 const styles = StyleSheet.create({
   all: {
     // borderWidth: 0.6,
-    width: Dimensions.get('screen').width * 0.9,
-    height: Dimensions.get('screen').height * 0.65,
+    width: Dimensions.get('screen').width * 0.98,
+    height: Dimensions.get('screen').height * 0.63,
   },
 });
 

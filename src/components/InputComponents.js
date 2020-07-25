@@ -31,6 +31,7 @@ const InputComponent = props => {
         defaultValue={text}
       />
       <TouchableOpacity
+        style={styles.button}
         onPress={() => {
           add();
           setText('');
@@ -56,8 +57,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   button: {
-    color: 'red',
-    width: 50,
     margin: 5,
   },
 });
