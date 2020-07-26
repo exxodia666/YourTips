@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, AsyncStorage, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, AsyncStorage} from 'react-native';
 import InputComponent from './components/InputComponents';
 import TodoList from './components/TodoList';
 import RootModel from './models/RootModel';
@@ -7,6 +7,8 @@ import 'mobx-react/batchingForReactNative';
 import FilterButtons from './components/FilterButtons';
 import {AsyncTrunk} from 'mobx-sync';
 import Counter from './components/Counter';
+import {create} from 'mobx-persist';
+//import AsyncStorage from '@react-native-community/async-storage'
 
 export const mode = {
   all: 'all',
@@ -18,13 +20,18 @@ export const mode = {
 const App = () => {
   const [filterMode, setFilterMode] = useState(mode.all);
   const [loaded, setLoaded] = useState(true);
-
+  /*
+  const hydrate = create({storage: AsyncStorage});
+  hydrate('root', RootModel);
+  /*
   const trunk = new AsyncTrunk(RootModel, {storage: AsyncStorage});
+
   trunk.init().then(e => {
-    console.log(e);
+    console.log(AsyncStorage.getAllKeys());
     setLoaded(true);
   });
-
+*/
+  RootModel.dispose();
   const MobxContext = React.createContext(null);
 
   function useRootModel() {

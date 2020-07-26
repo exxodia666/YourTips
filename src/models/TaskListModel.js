@@ -1,5 +1,7 @@
 import TaskModel from './TaskModel';
+//import {persist} from 'mobx-persist';
 const {decorate, observable, action, computed} = require('mobx');
+///import {serializable, primitive} from 'serializr';
 
 class TaskListModel {
   items = [];
@@ -7,7 +9,6 @@ class TaskListModel {
     this.items = items;
   }
   addTask = text => {
-    console.log('ADD');
     this.items.push(
       new TaskModel({
         id: Math.random(),
@@ -17,19 +18,16 @@ class TaskListModel {
   };
 
   deleteTask = () => {
-    console.log('DELETE ACTION');
     this.items = this.items.filter(item => item.selected === false);
   };
 
   get showActiveTasks() {
-    console.log('Computed');
     return this.items.filter(item => {
       return item.finished === false;
     });
   }
 
   get showDoneTasks() {
-    console.log('Computed 2');
     return this.items.filter(item => {
       return item.finished === true;
     });
@@ -48,7 +46,7 @@ class TaskListModel {
 }
 
 export default decorate(TaskListModel, {
-  items: observable,
+  items: [observable],
   addTask: action,
   deleteTask: action,
   showActiveTasks: computed,

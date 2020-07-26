@@ -16,7 +16,6 @@ const TodoList = ({filterMode, model}) => {
   return (
     <ScrollView style={styles.all}>
       {tasks.map(item => {
-        console.log(item);
         return (
           <ListItem
             key={item.id}

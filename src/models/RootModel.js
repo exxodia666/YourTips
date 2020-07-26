@@ -1,5 +1,6 @@
 import TaskListModel from './TaskListModel';
 import TaskModel from './TaskModel';
+import {autorun} from 'mobx';
 
 const tasks = [];
 class RootModel {
@@ -8,5 +9,9 @@ class RootModel {
       items: tasks.map(item => new TaskModel(item)),
     });
   }
+
+  dispose = autorun(() => {
+    console.log('TRIGGER' + this.tasks);
+  });
 }
 export default new RootModel();

@@ -1,5 +1,6 @@
-const {decorate, observable, action} = require('mobx');
-
+import {persist} from 'mobx-persist';
+import {decorate, observable, action} from 'mobx';
+import {serializable, primitive} from 'serializr';
 class TaskModel {
   text = '';
   finished = false;
@@ -12,12 +13,10 @@ class TaskModel {
   }
 
   toggleTask = () => {
-    console.log('TOGGLE');
     this.finished = !this.finished;
   };
 
   toggleSelect = () => {
-    console.log('TOGGLE SElect');
     this.selected = !this.selected;
   };
 
@@ -26,15 +25,14 @@ class TaskModel {
   };
 
   editTask = task => {
-    console.log('EDIT');
     this.text = task;
   };
 }
 export default decorate(TaskModel, {
-  text: observable,
-  finished: observable,
-  selected: observable,
-  favorite: observable,
+  text: [observable],
+  finished: [observable],
+  selected: [observable],
+  favorite: [observable],
   toggleTask: action,
   editTask: action,
   makeTaskFavorite: action,
