@@ -4,8 +4,8 @@ import {observer} from 'mobx-react';
 import {mode} from '../App';
 
 const Counter = ({model}) => {
-  const counter = model().tasks.showSelectedCount;
-  const deleteTasks = model().tasks.deleteTask;
+  const counter = model().showSelectedCount;
+  const deleteTasks = model().deleteTask;
   return (
     <View style={styles.counter}>
       {counter > 0 ? (

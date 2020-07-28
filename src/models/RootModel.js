@@ -1,17 +1,19 @@
 import TaskListModel from './TaskListModel';
-import TaskModel from './TaskModel';
-import {autorun} from 'mobx';
+import {create} from 'mobx-persist';
+import {AsyncStorage} from 'react-native';
 
 const tasks = [];
+const hydrate = create({
+  storage: AsyncStorage,
+  jsonify: true,
+});
+
 class RootModel {
+  listStore = new TaskListModel(tasks);
   constructor() {
-    this.tasks = new TaskListModel({
-      items: tasks.map(item => new TaskModel(item)),
+    hydrate('list', this.listStore).then(() => {
+      this.listStore.saveTasks(this.listStore.items);
     });
   }
-
-  dispose = autorun(() => {
-    console.log('TRIGGER' + this.tasks);
-  });
 }
 export default new RootModel();

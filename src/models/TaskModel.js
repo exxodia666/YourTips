@@ -1,15 +1,17 @@
-import {persist} from 'mobx-persist';
 import {decorate, observable, action} from 'mobx';
-import {serializable, primitive} from 'serializr';
+
 class TaskModel {
   text = '';
   finished = false;
   favorite = false;
   selected = false;
 
-  constructor({id, text}) {
+  constructor({id, text, finished = false, favorite = false, selected = false}) {
     this.id = id;
     this.text = text;
+    this.finished = finished;
+    this.favorite = favorite;
+    this.selected = selected;
   }
 
   toggleTask = () => {

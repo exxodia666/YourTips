@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 const InputComponent = props => {
   const [text, setText] = useState('');
-  const addTask = props.model().tasks.addTask;
+  const addTask = props.model().addTask;
 
   const add = () => {
     if (text !== '') {

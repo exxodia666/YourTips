@@ -1,13 +1,22 @@
 import TaskModel from './TaskModel';
-//import {persist} from 'mobx-persist';
+import {persist} from 'mobx-persist';
 const {decorate, observable, action, computed} = require('mobx');
-///import {serializable, primitive} from 'serializr';
 
 class TaskListModel {
   items = [];
-  constructor({items}) {
-    this.items = items;
-  }
+
+  saveTasks = items => {
+    this.items = items.map(item => {
+      return new TaskModel({
+        id: item.id,
+        text: item.text,
+        finished: item.finished,
+        favorite: item.favorite,
+        selected: item.selected,
+      });
+    });
+  };
+
   addTask = text => {
     this.items.push(
       new TaskModel({
@@ -46,7 +55,7 @@ class TaskListModel {
 }
 
 export default decorate(TaskListModel, {
-  items: [observable],
+  items: [persist('list'), observable],
   addTask: action,
   deleteTask: action,
   showActiveTasks: computed,

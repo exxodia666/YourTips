@@ -7,12 +7,12 @@ import {mode} from '../App';
 const TodoList = ({filterMode, model}) => {
   const tasks =
     filterMode === mode.all
-      ? model().tasks.items //all tasks
+      ? model().items //all tasks
       : filterMode === mode.active
-      ? model().tasks.showActiveTasks //active tasks
+      ? model().showActiveTasks //active tasks
       : filterMode === mode.done
-      ? model().tasks.showDoneTasks ///done tasks
-      : model().tasks.showFavoriteTasks; /// favorite task
+      ? model().showDoneTasks ///done tasks
+      : model().showFavoriteTasks; /// favorite task
   return (
     <ScrollView style={styles.all}>
       {tasks.map(item => {
@@ -28,7 +28,7 @@ const TodoList = ({filterMode, model}) => {
             toggleSelect={item.toggleSelect}
             edit={item.editTask}
             selected={item.selected}
-            delete={model().tasks.deleteTask}
+            delete={model().deleteTask}
           />
         );
       })}
