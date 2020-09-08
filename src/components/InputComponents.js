@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -44,6 +44,7 @@ const InputComponent = props => {
 
 const styles = StyleSheet.create({
   inputComponent: {
+    //backgroundColor: 'red',
     width: Dimensions.get('screen').width * 0.9,
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View, AsyncStorage} from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import InputComponent from './components/InputComponents';
 import TodoList from './components/TodoList';
 import RootModel from './models/RootModel';
@@ -31,8 +31,8 @@ const App = () => {
           <View style={styles.app}>
             <FilterButtons setMode={setFilterMode} />
             <Counter model={useRootModel} />
-            <TodoList model={useRootModel} filterMode={filterMode} />
             <InputComponent model={useRootModel} />
+            <TodoList model={useRootModel} filterMode={filterMode} />
           </View>
         </MobxContext.Provider>
       </SafeAreaView>

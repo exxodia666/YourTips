@@ -1,6 +1,6 @@
 import TaskModel from './TaskModel';
-import {persist} from 'mobx-persist';
-const {decorate, observable, action, computed} = require('mobx');
+import { persist } from 'mobx-persist';
+const { decorate, observable, action, computed } = require('mobx');
 
 class TaskListModel {
   items = [];
@@ -12,7 +12,7 @@ class TaskListModel {
         text: item.text,
         finished: item.finished,
         favorite: item.favorite,
-        selected: item.selected,
+        selected: false,
       });
     });
   };
