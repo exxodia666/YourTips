@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   all: {
     // borderWidth: 0.6,
     width: Dimensions.get('screen').width * 0.98,
-    height: Dimensions.get('screen').height * 0.63,
+    height: Dimensions.get('screen').height * 0.73,
   },
 });
 
