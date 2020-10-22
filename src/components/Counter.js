@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Button, TouchableOpacity} from 'react-native';
 import {observer} from 'mobx-react';
-import {mode} from '../App';
 
 const Counter = ({model}) => {
   const counter = model().showSelectedCount;
