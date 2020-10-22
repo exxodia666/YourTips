@@ -1,20 +1,44 @@
 import React from 'react';
-import {StyleSheet, ScrollView, Dimensions} from 'react-native';
-import {observer} from 'mobx-react';
+import { StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { observer } from 'mobx-react';
 import ListItem from './ListItem';
-import {mode} from '../App';
+import { mode } from '../App';
+import DraggableFlatList from 'react-native-draggable-flatlist';
+import TaskModel from '../models/TaskModel';
 
-const TodoList = ({filterMode, model}) => {
+const TodoList = ({ filterMode, model }) => {
   const tasks =
     filterMode === mode.all
       ? model().items //all tasks
       : filterMode === mode.active
-      ? model().showActiveTasks //active tasks
-      : filterMode === mode.done
-      ? model().showDoneTasks ///done tasks
-      : model().showFavoriteTasks; /// favorite task
+        ? model().showActiveTasks //active tasks
+        : filterMode === mode.done
+          ? model().showDoneTasks ///done tasks
+          : model().showFavoriteTasks; /// favorite task
+
+
   return (
-    <ScrollView style={styles.all}>
+    <DraggableFlatList
+      data={tasks}
+      renderItem={ListItem}
+      keyExtractor={(item) => `draggable-item-${item.key}`}
+    //onDragEnd={}
+    />
+  );
+};
+
+const styles = StyleSheet.create({
+  all: {
+    // borderWidth: 0.6,
+    width: Dimensions.get('screen').width * 0.98,
+    height: Dimensions.get('screen').height * 0.73,
+  },
+});
+
+export default observer(TodoList);
+
+/*
+<ScrollView style={styles.all}>
       {tasks.map(item => {
         return (
           <ListItem
@@ -33,20 +57,7 @@ const TodoList = ({filterMode, model}) => {
         );
       })}
     </ScrollView>
-  );
-};
 
-const styles = StyleSheet.create({
-  all: {
-    // borderWidth: 0.6,
-    width: Dimensions.get('screen').width * 0.98,
-    height: Dimensions.get('screen').height * 0.73,
-  },
-});
-
-export default observer(TodoList);
-
-/*
   return (
     <FlatList
       style={styles.list}

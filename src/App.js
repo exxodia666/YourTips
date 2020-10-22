@@ -6,6 +6,7 @@ import RootModel from './models/RootModel';
 import 'mobx-react/batchingForReactNative';
 import FilterButtons from './components/FilterButtons';
 import Counter from './components/Counter';
+import 'react-native-gesture-handler';
 
 export const mode = {
   all: 'all',
